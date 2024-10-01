@@ -3,11 +3,14 @@ package com.codingshuttle.anujTutorial.tutorial.EmployeeService;
 import com.codingshuttle.anujTutorial.tutorial.EmployeeDTO.EmployeeDTO;
 import com.codingshuttle.anujTutorial.tutorial.EmployeeEntity.EmployeeEntity;
 import com.codingshuttle.anujTutorial.tutorial.EmployeeRepository.EmployeeRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 //Service Class
@@ -53,4 +56,13 @@ public class EmployeeService {
         return true;}
         return false;
     }
+    //This method has some bugs instead of updating a record
+    //It creates a new record with a new id and null values
+    public EmployeeDTO upe(Long id, EmployeeDTO employeeDTO) {
+         EmployeeEntity employeeEntity=modelmapper.map(employeeRepository.findById(id),EmployeeEntity.class);
+         return modelmapper.map(employeeRepository.save(employeeEntity),EmployeeDTO.class);
+    }
+
 }
+
+
