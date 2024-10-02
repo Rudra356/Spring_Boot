@@ -67,12 +67,16 @@ public class EmployeeService {
         //        return "Employee not found";
 
         //Method 3
+        try{
         EmployeeEntity employeeEntity = employeeRepository.findById(id).get();
         employeeEntity.setName(employeeDTO.getName());
         employeeEntity.setJoinDate(employeeDTO.getJoinDate());
         employeeEntity.setActive(employeeDTO.isActive());
         employeeRepository.save(employeeEntity);
         return "Updated succesfully...";
+        } catch (Exception e) {
+            return "Record not found...";
+        }
     }
 
 }
