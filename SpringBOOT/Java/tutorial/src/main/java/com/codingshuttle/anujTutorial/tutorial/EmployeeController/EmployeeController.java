@@ -38,10 +38,10 @@ public class EmployeeController {
     public Boolean deleteEmployee(@PathVariable  Long id){
         return employeeService.DltEmpByID(id);
     }
-    //Under development
+    //02 Oct,2024 Completed
     //This method will update an existing employee details by taking their ID
     @PutMapping(path = "upemp/{id}")
-    public EmployeeDTO upemp(@PathVariable Long id,@RequestBody EmployeeDTO employeeDTO){
-        return employeeService.upe(id,employeeDTO);
+    public String upemp(@PathVariable Long id,@RequestBody EmployeeDTO employeeDTO){
+        return employeeService.upemp(id,employeeDTO);
     }
 }
