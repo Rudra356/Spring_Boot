@@ -1,3 +1,4 @@
 # Spring_Boot
-<h6>Oct 10,2024 : Added the @Putmapping method in employeeController and its fetch the service from employeeService class. Now this method has no         bugs.</h6>
-  <h6>  For more reference please go through the comments in the code... Thank you...</h6>
+<P><b>Oct 2, 2024 : </b>Added the @Putmapping method in employeeController and its fetch the service from employeeService class. Now this method has no bugs. </p></br></br>
+<P><b>Oct 3, 2024 : </b>Added Try-Catch block in the "getEmployeeById" method ans also revised other service methods...</p>
+
