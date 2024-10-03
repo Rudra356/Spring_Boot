@@ -25,8 +25,13 @@ public class EmployeeService {
     }
     //This service helps to find an employee using their id
     public EmployeeDTO getEmployeeById(Long id){
-        EmployeeEntity employeeEntity=employeeRepository.getById(id);
+        try{
+            EmployeeEntity employeeEntity=employeeRepository.getById(id);
         return modelmapper.map(employeeEntity,EmployeeDTO.class);
+        }
+        catch (Exception e) {
+           return null;
+        }
         // return new EmployeeDTO(employeeEntity.getId(), employeeEntity.getName(), employeeEntity.getJoinDate(), employeeEntity.isActive());
     }
     //This service creates a new employee
