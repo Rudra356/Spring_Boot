@@ -1,7 +1,8 @@
-package com.taskStudio.taskStudio.TaskEntity;
+package com.taskStudio.taskStudio.MaintenanceDTO;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -9,16 +10,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class TaskEntity {
+public class MaintenanceDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,9 +28,11 @@ public class TaskEntity {
 
     private LocalTime taskTime;
 
+    @NotNull
     @FutureOrPresent(message = "Task date must be today or in the future")
     private LocalDate taskDate;
 
-    // @JsonProperty("isCompleted")
-    // private Boolean isCompleted;
+//    @JsonProperty("isCompleted")
+//    private Boolean isCompleted;
+
 }
