@@ -44,15 +44,15 @@ public class MaintenanceServices {
     }
     //GET Method
     //For getting the listed tasks by their ID
-    public MaintenanceDTO GetTaskById(Long taskId) {
-        MaintenanceEntity maintenanceEntity = maintenanceRepo.findById(taskId).get();
+    public MaintenanceDTO GetTaskById(Long MId) {
+        MaintenanceEntity maintenanceEntity = maintenanceRepo.findById(MId).get();
         return  modelMapper.map(maintenanceEntity, MaintenanceDTO.class);
     }
     //DELETE Method
     //For deleting the listed tasks by their ID's
-    public boolean deleteTaskById(Long taskId) {
+    public boolean deleteTaskById(Long MId) {
         // Check if the task exists in the database
-        Optional<MaintenanceEntity> taskOptional = maintenanceRepo.findById(taskId);
+        Optional<MaintenanceEntity> taskOptional = maintenanceRepo.findById(MId);
 
         if (taskOptional.isPresent()) {
             // Task exists, so delete it
@@ -61,7 +61,7 @@ public class MaintenanceServices {
         } else {
             // Task doesn't exist, throw an exception or handle it accordingly
             try {
-                throw new Exception("Task not found with id: " + taskId);
+                throw new Exception("Task not found with id: " + MId);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -69,13 +69,18 @@ public class MaintenanceServices {
     }
     //PUT Method
     //For updating all the listed tasks by their ID's
-    public String updateTask(Long taskId, MaintenanceDTO maintenanceDTO) {
-        MaintenanceEntity existTask = maintenanceRepo.findById(taskId).get();
-        existTask.setTaskName(maintenanceDTO.getTaskName());
-        existTask.setTaskTime(maintenanceDTO.getTaskTime());
-        existTask.setTaskDate(maintenanceDTO.getTaskDate());
+    public String updateTask(Long MId, MaintenanceDTO maintenanceDTO) {
+        MaintenanceEntity existTask = maintenanceRepo.findById(MId).get();
+        existTask.setSpareName(maintenanceDTO.getSpareName());
+        existTask.setIssue(maintenanceDTO.getIssue());
+        existTask.setBrandModel(maintenanceDTO.getBrandModel());
+        existTask.setPrice(maintenanceDTO.getPrice());
+        existTask.setReplacingDate(maintenanceDTO.getReplacingDate());
+        existTask.setUpcomingCheckUpKM(maintenanceDTO.getUpcomingCheckUpKM());
+        existTask.setUpcomingCheckUpDATE(maintenanceDTO.getReplacingDate());
+//        existTask.setExtraNotes(maintenanceDTO.setExtraNotes());
         maintenanceRepo.save(existTask);
-        return "Update sucessfully...";
+        return "Updated sucessfully...";
     }
 
 }
