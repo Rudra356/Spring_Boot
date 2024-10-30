@@ -69,16 +69,17 @@ public class MaintenanceServices {
     }
     //PUT Method
     //For updating all the listed tasks by their ID's
-    public String updateTask(Long MId, MaintenanceDTO maintenanceDTO) {
+    public String updateTask(Long MId, @org.jetbrains.annotations.NotNull MaintenanceDTO maintenanceDTO) {
         MaintenanceEntity existTask = maintenanceRepo.findById(MId).get();
         existTask.setSpareName(maintenanceDTO.getSpareName());
         existTask.setIssue(maintenanceDTO.getIssue());
         existTask.setBrandModel(maintenanceDTO.getBrandModel());
         existTask.setPrice(maintenanceDTO.getPrice());
+        existTask.setCurrentKM(maintenanceDTO.getCurrentKM());
         existTask.setReplacingDate(maintenanceDTO.getReplacingDate());
         existTask.setUpcomingCheckUpKM(maintenanceDTO.getUpcomingCheckUpKM());
-        existTask.setUpcomingCheckUpDATE(maintenanceDTO.getReplacingDate());
-//        existTask.setExtraNotes(maintenanceDTO.setExtraNotes());
+        // existTask.setUpcomingCheckUpDATE(maintenanceDTO.getReplacingDate());
+        existTask.setExtraNotes(maintenanceDTO.getExtraNotes());
         maintenanceRepo.save(existTask);
         return "Updated sucessfully...";
     }

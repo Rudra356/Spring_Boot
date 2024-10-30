@@ -31,10 +31,10 @@ public class MaintenanceController {
     }
 
     //Method for updating  Listed Tasks
-    @PutMapping(path = "Tasks/{MId}")
-    public String updateTask(@PathVariable Long MId,@RequestBody MaintenanceDTO maintenanceDTO){
-        return maintenanceServices.updateTask(MId, maintenanceDTO);
-    }
+    //    @PutMapping(path = "Tasks/{MId}")
+    //    public String updateTask(@PathVariable Long MId,@RequestBody MaintenanceDTO maintenanceDTO){
+    //        return maintenanceServices.updateTask(MId, maintenanceDTO);
+    //    }
 
     //Method for deleting  Listed Tasks
     @DeleteMapping(path = "Tasks/{MId}")
@@ -45,7 +45,7 @@ public class MaintenanceController {
 
     //Method for getting individual Listed Tasks by their ID
     @GetMapping(path = "Tasks/{MId}")
-    public MaintenanceDTO GetTaskById(@PathVariable ("taskId") Long MId){
+    public MaintenanceDTO GetTaskById(@PathVariable("MId") Long MId){
         return   maintenanceServices.GetTaskById(MId);
     }
 
