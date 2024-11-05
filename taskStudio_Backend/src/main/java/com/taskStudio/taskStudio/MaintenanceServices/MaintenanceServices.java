@@ -4,6 +4,7 @@ import com.taskStudio.taskStudio.MaintenanceDTO.MaintenanceDTO;
 import com.taskStudio.taskStudio.MaintenanceEntity.MaintenanceEntity;
 import com.taskStudio.taskStudio.MaintenanceRepository.MaintenanceRepo;
 import org.modelmapper.ModelMapper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class MaintenanceServices {
         this.modelMapper = modelMapper;
     }
     //POST Method
-    //For creating a new Task
+    //For creating a new Records
     public MaintenanceDTO createTask(MaintenanceDTO maintenanceDTO) {
         try {
             MaintenanceEntity maintenanceEntity = modelMapper.map(maintenanceDTO, MaintenanceEntity.class);
@@ -29,10 +30,11 @@ public class MaintenanceServices {
         }
     }
     //GET Method
-    //For getting all the listed tasks
+    //For getting all the listed Records
     public List<MaintenanceDTO> getTasks() {
         try{
             List<MaintenanceDTO> list = new ArrayList<>();
+            Thread.sleep(700);
             for ( MaintenanceEntity maintenanceEntity : maintenanceRepo.findAll()){
                 MaintenanceDTO newl = modelMapper.map(maintenanceEntity, MaintenanceDTO.class);
                 list.add(newl);
@@ -43,35 +45,29 @@ public class MaintenanceServices {
         }
     }
     //GET Method
-    //For getting the listed tasks by their ID
+    //For getting the listed Records by their MID
     public MaintenanceDTO GetTaskById(Long MId) {
         MaintenanceEntity maintenanceEntity = maintenanceRepo.findById(MId).get();
         return  modelMapper.map(maintenanceEntity, MaintenanceDTO.class);
     }
     //DELETE Method
-    //For deleting the listed tasks by their ID's
-    public boolean deleteTaskById(Long MId) {
-        // Check if the task exists in the database
-        Optional<MaintenanceEntity> taskOptional = maintenanceRepo.findById(MId);
+    //For deleting the listed Records by their MID's
+    public boolean deleteTaskById(Long MId) throws InterruptedException {
+        Thread.yield();
+        Thread.sleep(1000);
+        MaintenanceEntity task = maintenanceRepo.findById(MId)
+                .orElseThrow(() -> new RuntimeException("Task not found with id: " + MId));
 
-        if (taskOptional.isPresent()) {
-            // Task exists, so delete it
-            maintenanceRepo.delete(taskOptional.get());
-            return true;  // Return true for successful deletion
-        } else {
-            // Task doesn't exist, throw an exception or handle it accordingly
-            try {
-                throw new Exception("Task not found with id: " + MId);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
+        maintenanceRepo.delete(task);
+        return true;
     }
+
     //PUT Method
-    //For updating all the listed tasks by their ID's
+    //For updating all the listed Records by their ID's
     public String updateTask(Long MId, @org.jetbrains.annotations.NotNull MaintenanceDTO maintenanceDTO) {
         MaintenanceEntity existTask = maintenanceRepo.findById(MId).get();
         existTask.setSpareName(maintenanceDTO.getSpareName());
+        existTask.setRC(maintenanceDTO.getRC());
         existTask.setIssue(maintenanceDTO.getIssue());
         existTask.setBrandModel(maintenanceDTO.getBrandModel());
         existTask.setPrice(maintenanceDTO.getPrice());

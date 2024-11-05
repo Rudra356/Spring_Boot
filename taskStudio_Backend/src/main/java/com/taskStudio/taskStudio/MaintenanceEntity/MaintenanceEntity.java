@@ -16,11 +16,13 @@ import java.time.LocalDate;
 public class MaintenanceEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long MId; //This variable is auto-generated for storing Maintenance ID ...
 
     @Size(min = 3, max = 10, message = "Spare name must be between 3 and 40 characters")
     private String spareName; //This variable is for storing Spare Name...
+
+    private String RC; //This holds the registration number of my different vehicles...
 
     private String issue; //This variable is for storing related or possible issues causing the Spare change ...
 
@@ -29,7 +31,7 @@ public class MaintenanceEntity {
     @PositiveOrZero(message = "The number must be zero or positive")
     private int price; //This variable is for storing Spare Price ...
 
-    private Long currentKM;
+    private Long currentKM; //This is for storing the current running km on the ODO
 
     private LocalDate replacingDate; //This variable is for storing Spare replacing Date...
 
