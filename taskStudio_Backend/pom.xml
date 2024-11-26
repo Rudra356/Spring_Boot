@@ -14,9 +14,11 @@
 	<name>taskStudio</name>
 	<description>Demo project for Spring Boot</description>
 
-	<properties>
-		<java.version>23</java.version> <!-- Ensure Java 23 is installed and used -->
-	</properties>
+    <properties>
+        <java.version>23</java.version>
+        <maven.compiler.source>23</maven.compiler.source>
+        <maven.compiler.target>23</maven.compiler.target> <!-- Ensure Java 23 is installed and used -->
+    </properties>
 
 	<dependencies>
 		<!-- Spring Boot JPA dependency for database interaction -->
@@ -73,12 +75,12 @@
 			<version>3.0.0</version>
 		</dependency>
 
-		<!-- MongoDB starter (if you're using MongoDB alongside relational databases) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-			<version>3.3.4</version>
+			<artifactId>spring-boot-devtools</artifactId>
+			<version>3.4.0</version>
 		</dependency>
+
 
 		<!-- Jakarta Bean Validation API for using validation annotations -->
 		<dependency>
@@ -87,12 +89,6 @@
 			<version>3.0.2</version> <!-- Latest stable version -->
 		</dependency>
 
-		<!-- Hibernate Validator as the implementation of the validation API -->
-		<dependency>
-			<groupId>org.hibernate.validator</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>8.0.0.Final</version>
-		</dependency>
 
 		<!-- Starter for validation in Spring Boot -->
 		<dependency>
