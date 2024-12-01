@@ -3,23 +3,22 @@ package com.taskStudio.taskStudio.MaintenanceServices;
 import com.taskStudio.taskStudio.MaintenanceDTO.MaintenanceDTO;
 import com.taskStudio.taskStudio.MaintenanceEntity.MaintenanceEntity;
 import com.taskStudio.taskStudio.MaintenanceRepository.MaintenanceRepo;
+import com.taskStudio.taskStudio.ServiceInterface.INterface;
 import org.modelmapper.ModelMapper;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class MaintenanceServices {
+public class MaintenanceServices implements INterface {
     final MaintenanceRepo maintenanceRepo;
     final ModelMapper modelMapper;
     public MaintenanceServices(MaintenanceRepo maintenanceRepo, ModelMapper modelMapper) {
         this.maintenanceRepo = maintenanceRepo;
         this.modelMapper = modelMapper;
     }
-
+    @Override
     //POST Method
     //For creating a new Records
     public MaintenanceDTO createTask(MaintenanceDTO maintenanceDTO) {
@@ -33,6 +32,7 @@ public class MaintenanceServices {
 
     //GET Method
     //For getting all the listed Records
+    @Override
     public List<MaintenanceDTO> getTasks() {
         try{
             List<MaintenanceDTO> list = new ArrayList<>();
@@ -49,6 +49,7 @@ public class MaintenanceServices {
 
     //GET Method
     //For getting the listed Records by their MID
+    @Override
     public MaintenanceDTO GetTaskById(Long MId) {
         MaintenanceEntity maintenanceEntity = maintenanceRepo.findById(MId).get();
         return  modelMapper.map(maintenanceEntity, MaintenanceDTO.class);
@@ -56,6 +57,7 @@ public class MaintenanceServices {
 
     //DELETE Method
     //For deleting the listed Records by their MID's
+    @Override
     public boolean deleteTaskById(Long MId) throws InterruptedException {
         Thread.yield();
         Thread.sleep(1000);
@@ -68,6 +70,7 @@ public class MaintenanceServices {
 
     //PUT Method
     //For updating all the listed Records by their ID's
+    @Override
     public String updateTask(Long MId, @org.jetbrains.annotations.NotNull MaintenanceDTO maintenanceDTO) {
         MaintenanceEntity existTask = maintenanceRepo.findById(MId).get();
         existTask.setSpareName(maintenanceDTO.getSpareName());
