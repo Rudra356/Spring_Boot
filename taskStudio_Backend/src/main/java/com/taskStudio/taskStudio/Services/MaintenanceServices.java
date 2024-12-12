@@ -1,4 +1,4 @@
-package com.taskStudio.taskStudio.MaintenanceServices;
+package com.taskStudio.taskStudio.Services;
 
 import com.taskStudio.taskStudio.MaintenanceDTO.MaintenanceDTO;
 import com.taskStudio.taskStudio.MaintenanceEntity.MaintenanceEntity;

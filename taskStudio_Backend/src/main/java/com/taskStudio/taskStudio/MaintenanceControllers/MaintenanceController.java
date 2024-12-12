@@ -1,9 +1,11 @@
 package com.taskStudio.taskStudio.MaintenanceControllers;
 
 import com.taskStudio.taskStudio.MaintenanceDTO.MaintenanceDTO;
-import com.taskStudio.taskStudio.MaintenanceServices.MaintenanceServices;
+import com.taskStudio.taskStudio.Services.EmailService;
+import com.taskStudio.taskStudio.Services.MaintenanceServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -14,6 +16,11 @@ import java.util.List;
 public class MaintenanceController {
     @Autowired
     final MaintenanceServices maintenanceServices;
+
+    @Autowired
+    private EmailService emailService;
+
+    public JavaMailSender javaMailSender;
 
     public MaintenanceController(MaintenanceServices maintenanceServices) {
         this.maintenanceServices = maintenanceServices;
@@ -49,4 +56,13 @@ public class MaintenanceController {
         return   maintenanceServices.GetTaskById(MId);
     }
 
+    @PostMapping("/send-email")
+    public String sendEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String message) {
+        try {
+            emailService.sendEmail(to, subject, message);
+            return "Email sent successfully!";
+        } catch (Exception e) {
+            return "Failed to send email: " + e.getMessage();
+        }
+    }
 }
