@@ -1,9 +1,9 @@
 package com.taskStudio.taskStudio.Services;
 
-import com.taskStudio.taskStudio.MaintenanceDTO.MaintenanceDTO;
-import com.taskStudio.taskStudio.MaintenanceEntity.MaintenanceEntity;
-import com.taskStudio.taskStudio.MaintenanceRepository.MaintenanceRepo;
-import com.taskStudio.taskStudio.ServiceInterface.INterface;
+import com.taskStudio.taskStudio.DTOs.MaintenanceDTO;
+import com.taskStudio.taskStudio.Entities.MaintenanceEntity;
+import com.taskStudio.taskStudio.Repositories.MaintenanceRepo;
+import com.taskStudio.taskStudio.ServiceInterface.MaintenanceServicesInterface;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MaintenanceServices implements INterface {
+public class MaintenanceServices implements MaintenanceServicesInterface {
     final MaintenanceRepo maintenanceRepo;
     final ModelMapper modelMapper;
     public MaintenanceServices(MaintenanceRepo maintenanceRepo, ModelMapper modelMapper) {

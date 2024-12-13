@@ -1,6 +1,6 @@
-package com.taskStudio.taskStudio.MaintenanceControllers;
+package com.taskStudio.taskStudio.Controllers;
 
-import com.taskStudio.taskStudio.MaintenanceDTO.MaintenanceDTO;
+import com.taskStudio.taskStudio.DTOs.MaintenanceDTO;
 import com.taskStudio.taskStudio.Services.EmailService;
 import com.taskStudio.taskStudio.Services.MaintenanceServices;
 import jakarta.validation.Valid;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @Validated

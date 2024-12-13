@@ -1,12 +1,10 @@
 package com.taskStudio.taskStudio.ServiceInterface;
 
-import com.taskStudio.taskStudio.MaintenanceDTO.MaintenanceDTO;
-import com.taskStudio.taskStudio.MaintenanceRepository.MaintenanceRepo;
-import org.modelmapper.ModelMapper;
+import com.taskStudio.taskStudio.DTOs.MaintenanceDTO;
 
 import java.util.List;
 
-public interface INterface {
+public interface MaintenanceServicesInterface {
 
     public MaintenanceDTO createTask(MaintenanceDTO maintenanceDTO);
 
