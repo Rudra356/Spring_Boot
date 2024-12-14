@@ -15,7 +15,7 @@ public class EmailService implements EmailServiceInterface {
 
     @Autowired
     private JavaMailSender javaMailSender;
-
+    @Override
     public void sendEmail(String to, String subject, String message) throws MailException {
 
         try {
