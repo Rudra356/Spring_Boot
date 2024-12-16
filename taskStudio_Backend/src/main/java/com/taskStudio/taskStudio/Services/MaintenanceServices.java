@@ -1,17 +1,24 @@
 package com.taskStudio.taskStudio.Services;
 
+import com.taskStudio.taskStudio.Controllers.MaintenanceController;
 import com.taskStudio.taskStudio.DTOs.MaintenanceDTO;
 import com.taskStudio.taskStudio.Entities.MaintenanceEntity;
 import com.taskStudio.taskStudio.Repositories.MaintenanceRepo;
 import com.taskStudio.taskStudio.ServiceInterface.MaintenanceServicesInterface;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+@Slf4j
 @Service
 public class MaintenanceServices implements MaintenanceServicesInterface {
+
+    private static final Logger logger = Logger.getLogger(MaintenanceController.class.getName());
+
     final MaintenanceRepo maintenanceRepo;
     final ModelMapper modelMapper;
     public MaintenanceServices(MaintenanceRepo maintenanceRepo, ModelMapper modelMapper) {
@@ -24,6 +31,7 @@ public class MaintenanceServices implements MaintenanceServicesInterface {
     public MaintenanceDTO createTask(MaintenanceDTO maintenanceDTO) {
         try {
             MaintenanceEntity maintenanceEntity = modelMapper.map(maintenanceDTO, MaintenanceEntity.class);
+            logger.info("Creating new Record...[Service]");
             return modelMapper.map(maintenanceRepo.save(maintenanceEntity), MaintenanceDTO.class);
         } catch (Exception e) {
             return null;
@@ -41,6 +49,7 @@ public class MaintenanceServices implements MaintenanceServicesInterface {
                 MaintenanceDTO newl = modelMapper.map(maintenanceEntity, MaintenanceDTO.class);
                 list.add(newl);
             }
+            logger.info("Listing the records...[Service]");
             return list;
         } catch (Exception e) {
             return null;
@@ -52,6 +61,7 @@ public class MaintenanceServices implements MaintenanceServicesInterface {
     @Override
     public MaintenanceDTO GetTaskById(Long MId) {
         MaintenanceEntity maintenanceEntity = maintenanceRepo.findById(MId).get();
+        logger.info("Getting record by MID...[Service]");
         return  modelMapper.map(maintenanceEntity, MaintenanceDTO.class);
     }
 
@@ -63,7 +73,7 @@ public class MaintenanceServices implements MaintenanceServicesInterface {
         Thread.sleep(1000);
         MaintenanceEntity task = maintenanceRepo.findById(MId)
                 .orElseThrow(() -> new RuntimeException("Task not found with id: " + MId));
-
+        logger.info("Deleting record by MID...[Service]");
         maintenanceRepo.delete(task);
         return true;
     }
@@ -84,6 +94,7 @@ public class MaintenanceServices implements MaintenanceServicesInterface {
         // existTask.setUpcomingCheckUpDATE(maintenanceDTO.getReplacingDate());
         existTask.setExtraNotes(maintenanceDTO.getExtraNotes());
         maintenanceRepo.save(existTask);
+        logger.info("Updating record by MID...[Service]");
         return "Updated sucessfully...";
     }
 
