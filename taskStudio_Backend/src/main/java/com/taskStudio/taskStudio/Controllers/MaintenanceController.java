@@ -28,7 +28,7 @@ public class MaintenanceController implements MaintenanceServicesInterface {
     @Autowired
     private EmailService emailService;
 
-    public JavaMailSender javaMailSender;
+    //public JavaMailSender javaMailSender;
 
     public MaintenanceController(MaintenanceServices maintenanceServices) {
         this.maintenanceServices = maintenanceServices;
@@ -59,7 +59,7 @@ public class MaintenanceController implements MaintenanceServicesInterface {
     //Method for deleting  Listed Records
     @Override
     @DeleteMapping(path = "Tasks/{MId}")
-    public boolean deleteTaskById(@PathVariable Long MId) throws InterruptedException {
+    public boolean deleteTaskById(@PathVariable("MId") Long MId) throws InterruptedException {
         logger.info("Inside deleteTaskById  [Controller]...");
         return maintenanceServices.deleteTaskById(MId);
     }

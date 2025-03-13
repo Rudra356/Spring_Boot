@@ -20,14 +20,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 
 public class MaintenanceEntity {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long MId; //This variable is auto-generated for storing Maintenance ID ...
 
-    @Size(min = 3, max = 10, message = "Spare name must be between 3 and 40 characters")
+    @Size(min = 1, max = 40, message = "Spare name must be between 3 and 40 characters")
     private String spareName; //This variable is for storing Spare Name...
-
+    @NotNull(message = "Registration cannot be null")
     private String RC; //This holds the registration number of my different vehicles...
 
     private String issue; //This variable is for storing related or possible issues causing the Spare change ...
