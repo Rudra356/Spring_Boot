@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MaintenanceRepo extends JpaRepository<MaintenanceEntity, Long > {
-
-MaintenanceEntity findByUpcomingCheckUpKM(Long upcomingCheckUpKM);
-
+//
+//MaintenanceEntity findByUpcomingCheckUpKM(Long upcomingCheckUpKM);
+//
 }

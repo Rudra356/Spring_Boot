@@ -28,20 +28,19 @@ public class MaintenanceController implements MaintenanceServicesInterface {
     @Autowired
     private EmailService emailService;
 
-    //public JavaMailSender javaMailSender;
 
     public MaintenanceController(MaintenanceServices maintenanceServices) {
         this.maintenanceServices = maintenanceServices;
     }
-    //Method for creating a new Records
+    //For creating a new Records
     @Override
     @PostMapping(path = "Tasks")
     public MaintenanceDTO createTask(@RequestBody MaintenanceDTO maintenanceDTO){
-        logger.info("Inside createTask  [Controller]...");
+        logger.info("Inside createTask [Controller]...");
         return maintenanceServices.createTask(maintenanceDTO);
     }
 
-    //Method for Getting list of Listed Records
+    //For Getting list of Listed Records
     @Override
     @GetMapping(path = "Tasks")
     public List<MaintenanceDTO> getTasks(){
@@ -49,14 +48,14 @@ public class MaintenanceController implements MaintenanceServicesInterface {
         return maintenanceServices.getTasks();
     }
     @Override
-    //Method for updating  Listed Records
+    //For updating  Listed Records
         @PutMapping(path = "Tasks/{MId}")
         public String updateTask(@PathVariable Long MId,@RequestBody MaintenanceDTO maintenanceDTO){
         logger.info("Inside updateTask  [Controller]...");
         return maintenanceServices.updateTask(MId, maintenanceDTO);
         }
 
-    //Method for deleting  Listed Records
+    //For deleting  Listed Records
     @Override
     @DeleteMapping(path = "Tasks/{MId}")
     public boolean deleteTaskById(@PathVariable("MId") Long MId) throws InterruptedException {
@@ -65,7 +64,7 @@ public class MaintenanceController implements MaintenanceServicesInterface {
     }
 
 
-    //Method for getting individual Listed Records by their MID
+    //For getting individual Listed Records by their MID
     @Override
     @GetMapping(path = "Tasks/{MId}")
     public MaintenanceDTO GetTaskById(@PathVariable("MId") Long MId){
@@ -73,7 +72,8 @@ public class MaintenanceController implements MaintenanceServicesInterface {
         logger.info("Inside GetTaskById  [Controller]...");
         return   maintenanceServices.GetTaskById(MId);
     }
-
+    //Experimental methods
+    //Mail--sender
     @PostMapping("/send-email")
     public String sendEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String message) {
         try {

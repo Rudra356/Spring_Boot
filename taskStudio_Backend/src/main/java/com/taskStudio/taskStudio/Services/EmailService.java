@@ -25,7 +25,7 @@ public class EmailService implements EmailServiceInterface {
             mail.setSubject(subject);
 
             for(int i=0;i<10000;i++){
-                //Thread.sleep(400);
+                Thread.sleep(700);
                 javaMailSender.send(mail);
             }
         } catch (Exception e) {
