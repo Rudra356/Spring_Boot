@@ -14,9 +14,9 @@ public interface MaintenanceControllerInterface {
     //For getting list of maintenance records
     public List<MaintenanceDTO> getTasks();
     //For deleting maintenance records
-    public boolean deleteTaskById(@PathVariable Long MId) throws InterruptedException;
+    public boolean deleteTaskById(@PathVariable String MId) throws InterruptedException;
     //For getting maintenance records by their MID's'
-    public MaintenanceDTO GetTaskById(@PathVariable("MId") Long MId);
+    public MaintenanceDTO GetTaskById(@PathVariable("MId") String MId);
 
 
 }

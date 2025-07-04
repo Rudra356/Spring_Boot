@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Slf4j
-@Validated
+
 @RestController
-@CrossOrigin(origins = "http://localhost:3000/")
-public class MaintenanceController implements MaintenanceServicesInterface {
+//@CrossOrigin(origins = "http://localhost:3000/")
+public class MaintenanceController {
 
     private static final Logger logger = Logger.getLogger(MaintenanceController.class.getName());
 
@@ -33,41 +33,42 @@ public class MaintenanceController implements MaintenanceServicesInterface {
         this.maintenanceServices = maintenanceServices;
     }
     //For creating a new Records
-    @Override
+
     @PostMapping(path = "Tasks")
     public MaintenanceDTO createTask(@RequestBody MaintenanceDTO maintenanceDTO){
         logger.info("Inside createTask [Controller]...");
+        System.out.println(maintenanceDTO);
         return maintenanceServices.createTask(maintenanceDTO);
     }
 
     //For Getting list of Listed Records
-    @Override
-    @GetMapping(path = "Tasks")
+
+    @GetMapping("Tasks")
     public List<MaintenanceDTO> getTasks(){
         logger.info("Inside getTasks    [Controller]...");
         return maintenanceServices.getTasks();
     }
-    @Override
+
     //For updating  Listed Records
-        @PutMapping(path = "Tasks/{MId}")
-        public String updateTask(@PathVariable Long MId,@RequestBody MaintenanceDTO maintenanceDTO){
+        @PutMapping("Tasks/{MId}")
+        public String updateTask(@PathVariable String MId,@RequestBody MaintenanceDTO maintenanceDTO){
         logger.info("Inside updateTask  [Controller]...");
         return maintenanceServices.updateTask(MId, maintenanceDTO);
         }
 
     //For deleting  Listed Records
-    @Override
-    @DeleteMapping(path = "Tasks/{MId}")
-    public boolean deleteTaskById(@PathVariable("MId") Long MId) throws InterruptedException {
+
+    @DeleteMapping("Tasks/{MId}")
+    public boolean deleteTaskById(@PathVariable("MId") String MId) throws InterruptedException {
         logger.info("Inside deleteTaskById  [Controller]...");
         return maintenanceServices.deleteTaskById(MId);
     }
 
 
     //For getting individual Listed Records by their MID
-    @Override
-    @GetMapping(path = "Tasks/{MId}")
-    public MaintenanceDTO GetTaskById(@PathVariable("MId") Long MId){
+
+    @GetMapping("Tasks/{MId}")
+    public MaintenanceDTO GetTaskById(@PathVariable("MId") String MId){
 
         logger.info("Inside GetTaskById  [Controller]...");
         return   maintenanceServices.GetTaskById(MId);

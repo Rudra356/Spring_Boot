@@ -10,9 +10,9 @@ public interface MaintenanceServicesInterface {
 
     public List<MaintenanceDTO> getTasks();
 
-    MaintenanceDTO GetTaskById(Long MId);
+    MaintenanceDTO GetTaskById(String MId);
 
-    public boolean deleteTaskById(Long MId) throws InterruptedException;
+    public boolean deleteTaskById(String MId) throws InterruptedException;
 
     public String updateTask(Long MId, @org.jetbrains.annotations.NotNull MaintenanceDTO maintenanceDTO);
 }

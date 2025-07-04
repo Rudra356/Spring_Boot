@@ -2,11 +2,12 @@ package com.taskStudio.taskStudio.Repositories;
 
 
 import com.taskStudio.taskStudio.Entities.MaintenanceEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MaintenanceRepo extends JpaRepository<MaintenanceEntity, Long > {
+public interface MaintenanceRepo extends MongoRepository<MaintenanceEntity, String > {
 //
 //MaintenanceEntity findByUpcomingCheckUpKM(Long upcomingCheckUpKM);
 //

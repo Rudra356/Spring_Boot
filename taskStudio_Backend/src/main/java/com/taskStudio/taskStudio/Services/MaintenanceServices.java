@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 @Slf4j
 @Service
-public class MaintenanceServices implements MaintenanceServicesInterface {
+public class MaintenanceServices  {
 
     private static final Logger logger = Logger.getLogger(MaintenanceController.class.getName());
 
@@ -27,11 +27,12 @@ public class MaintenanceServices implements MaintenanceServicesInterface {
     }
     //POST Method
     //For creating a new Records
-    @Override
+
     public MaintenanceDTO createTask(MaintenanceDTO maintenanceDTO) {
         try {
             MaintenanceEntity maintenanceEntity = modelMapper.map(maintenanceDTO, MaintenanceEntity.class);
             logger.info("Creating new Record...[Service]");
+            System.out.println(maintenanceDTO);
             return modelMapper.map(maintenanceRepo.save(maintenanceEntity), MaintenanceDTO.class);
         } catch (Exception e) {
             return null;
@@ -40,7 +41,7 @@ public class MaintenanceServices implements MaintenanceServicesInterface {
 
     //GET Method
     //For getting all the listed Records
-    @Override
+
     public List<MaintenanceDTO> getTasks() {
         try{
             List<MaintenanceDTO> list = new ArrayList<>();
@@ -58,8 +59,8 @@ public class MaintenanceServices implements MaintenanceServicesInterface {
 
     //GET Method
     //For getting the listed Records by their MID
-    @Override
-    public MaintenanceDTO GetTaskById(Long MId) {
+
+    public MaintenanceDTO GetTaskById(String MId) {
         MaintenanceEntity maintenanceEntity = maintenanceRepo.findById(MId).get();
         logger.info("Getting record by MID...[Service]");
         return  modelMapper.map(maintenanceEntity, MaintenanceDTO.class);
@@ -67,8 +68,8 @@ public class MaintenanceServices implements MaintenanceServicesInterface {
 
     //DELETE Method
     //For deleting the listed Records by their MID's
-    @Override
-    public boolean deleteTaskById(Long MId) throws InterruptedException {
+
+    public boolean deleteTaskById(String MId) throws InterruptedException {
         Thread.yield();
         Thread.sleep(1000);
         MaintenanceEntity task = maintenanceRepo.findById(MId)
@@ -80,8 +81,8 @@ public class MaintenanceServices implements MaintenanceServicesInterface {
 
     //PUT Method
     //For updating all the listed Records by their ID's
-    @Override
-    public String updateTask(Long MId, @org.jetbrains.annotations.NotNull MaintenanceDTO maintenanceDTO) {
+
+    public String updateTask(String MId, @org.jetbrains.annotations.NotNull MaintenanceDTO maintenanceDTO) {
         MaintenanceEntity existTask = maintenanceRepo.findById(MId).get();
         existTask.setSpareName(maintenanceDTO.getSpareName());
         existTask.setRC(maintenanceDTO.getRC());
